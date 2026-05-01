@@ -1,0 +1,3 @@
+.task-modal-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.task-modal-form  { display: flex; flex-direction: column; gap: 14px; }
+.task-modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }

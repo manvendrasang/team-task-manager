@@ -1,0 +1,73 @@
+.project-detail-page   { padding: 24px 32px; max-width: 1400px; margin: 0 auto; }
+.project-detail-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+.project-detail-left   { display: flex; align-items: center; gap: 14px; }
+.project-color-dot     { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+.project-detail-title  { font-size: 24px; font-weight: 800; }
+.project-detail-desc   { font-size: 13px; color: var(--text2); margin-top: 4px; }
+.project-detail-actions { display: flex; gap: 8px; }
+
+.stats-bar     { display: flex; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 20px; overflow: hidden; }
+.stats-bar-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  padding: 14px 10px; border-right: 1px solid var(--border);
+}
+.stats-bar-item:last-child { border-right: none; }
+.stats-bar-val   { font-size: 22px; font-weight: 800; line-height: 1; }
+.stats-bar-label { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+.detail-tabs    { display: flex; gap: 4px; margin-bottom: 20px; }
+.detail-tab     { padding: 8px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--text2); transition: var(--transition); }
+.detail-tab.active { background: var(--accent); color: #fff; }
+
+.kanban-board  { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; align-items: start; }
+.kanban-col    { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.kanban-col-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 16px; border-bottom: 1px solid var(--border);
+}
+.kanban-col-label { display: flex; align-items: center; gap: 8px; }
+.kanban-col-dot   { width: 8px; height: 8px; border-radius: 50%; }
+.kanban-col-title { font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
+.kanban-col-count {
+  background: var(--bg4); border-radius: 100px;
+  padding: 2px 8px; font-size: 12px; color: var(--text2);
+}
+.kanban-col-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; min-height: 100px; }
+.kanban-empty    { text-align: center; padding: 20px 0; color: var(--text3); font-size: 13px; }
+
+.members-list   { max-width: 600px; display: flex; flex-direction: column; gap: 8px; }
+.member-row     {
+  display: flex; align-items: center; gap: 14px; padding: 14px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.member-row-avatar {
+  width: 38px; height: 38px; border-radius: 8px; background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; flex-shrink: 0; color: #fff;
+}
+.member-row-name  { font-weight: 500; font-size: 14px; }
+.member-row-email { font-size: 12px; color: var(--text3); }
+.member-row-role  { font-size: 12px; font-weight: 500; }
+
+/* Warnings panel */
+.warnings-panel { max-width: 700px; }
+.warning-item {
+  display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px;
+  background: var(--warn-bg); border: 1px solid rgba(240,192,80,0.2);
+  border-radius: var(--radius); margin-bottom: 8px;
+}
+.warning-icon   { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.warning-body   { flex: 1; }
+.warning-to     { font-size: 13px; font-weight: 600; color: var(--warn); margin-bottom: 2px; }
+.warning-msg    { font-size: 13px; color: var(--text2); }
+.warning-date   { font-size: 11px; color: var(--text3); margin-top: 4px; }
+.warning-task   { font-size: 12px; color: var(--text3); font-style: italic; }
+
+/* Expedite banner on task card */
+.expedite-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 600;
+  background: var(--red-bg); color: var(--red);
+  border: 1px solid rgba(240,96,128,0.2);
+}

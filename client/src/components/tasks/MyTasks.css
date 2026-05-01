@@ -1,0 +1,35 @@
+.my-tasks-page   { padding: 32px; max-width: 900px; margin: 0 auto; }
+.my-tasks-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+.my-tasks-title  { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+
+.filter-bar      { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+.filter-group    { display: flex; gap: 4px; }
+.filter-btn      { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 500; color: var(--text2); transition: var(--transition); }
+.filter-btn.active { background: var(--accent); color: #fff; }
+.filter-btn:hover:not(.active) { background: var(--bg3); color: var(--text); }
+
+.tasks-list      { display: flex; flex-direction: column; gap: 8px; }
+.task-list-row   {
+  display: flex; align-items: flex-start; gap: 14px; padding: 14px 16px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); transition: var(--transition);
+}
+.task-list-row.overdue { border-color: rgba(240,96,128,0.3); background: rgba(240,96,128,0.03); }
+.task-list-dot   { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.task-list-body  { flex: 1; min-width: 0; }
+.task-list-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.task-list-desc  {
+  font-size: 12px; color: var(--text2); margin-bottom: 8px;
+  overflow: hidden; display: -webkit-box;
+  -webkit-line-clamp: 1; -webkit-box-orient: vertical;
+}
+.task-list-tags  { display: flex; gap: 6px; flex-wrap: wrap; }
+.task-tag        { font-size: 11px; padding: 2px 8px; border-radius: 100px; border: 1px solid var(--border); color: var(--text3); }
+.task-tag-project { color: var(--accent); border-color: rgba(126,114,242,0.3); }
+.task-list-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.task-list-due   { font-size: 12px; }
+.task-list-select {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 8px; font-size: 12px;
+  color: var(--text); cursor: pointer; outline: none;
+}

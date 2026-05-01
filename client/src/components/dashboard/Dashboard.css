@@ -1,0 +1,32 @@
+.dashboard-page   { padding: 32px; max-width: 1200px; margin: 0 auto; }
+.dashboard-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; }
+.dashboard-greeting { font-size: 28px; font-weight: 800; margin-bottom: 4px; }
+.dashboard-subtext  { color: var(--text2); font-size: 14px; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card  { display: flex; align-items: center; gap: 16px; }
+.stat-icon  { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.stat-value { font-size: 28px; font-weight: 800; line-height: 1; }
+.stat-label { font-size: 12px; color: var(--text2); margin-top: 4px; }
+
+.dashboard-grid2     { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px,1fr)); gap: 16px; }
+.section-header      { display: flex; justify-content: space-between; align-items: center; }
+.section-title       { font-size: 16px; font-weight: 700; }
+.section-link        { font-size: 13px; color: var(--accent); }
+
+.task-list     { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.task-row      { display: flex; align-items: center; gap: 12px; padding: 10px; background: var(--bg3); border-radius: 8px; }
+.task-dot      { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.task-title-sm { font-size: 14px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.task-meta-sm  { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+.project-list-sm { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.project-row-sm  {
+  display: flex; align-items: center; gap: 12px; padding: 10px;
+  background: var(--bg3); border-radius: 8px; transition: var(--transition);
+  text-decoration: none; color: inherit;
+}
+.project-row-sm:hover { background: var(--bg4); }
+.project-dot-sm  { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.project-name-sm { font-size: 14px; font-weight: 500; }
+.project-meta-sm { font-size: 12px; color: var(--text3); margin-top: 2px; }
