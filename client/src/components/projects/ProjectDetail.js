@@ -160,12 +160,6 @@ export default function ProjectDetail() {
     return acc;
   }, {});
 
-  // Non-admin members for warning target (exclude self)
-  const warnableMembers = project?.members?.filter(m => {
-    const uid = m.user?._id || m.user;
-    return uid !== project.owner?._id;
-  }) || [];
-
   // Overdue tasks for warning reference
   const overdueTasks = tasks.filter(t => t.dueDate && new Date(t.dueDate) < new Date() && t.status !== 'done');
 
