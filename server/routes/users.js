@@ -1,41 +1,60 @@
 const express = require('express');
-const router = express.Router();
+const { body } = require('express-validator');
+
 const User = require('../models/User');
+const validate = require('../middleware/validate');
+const asyncHandler = require('../utils/asyncHandler');
+const ApiError = require('../utils/ApiError');
 const { protect } = require('../middleware/auth');
+const { normalizeEmail } = require('../utils/helpers');
 
-// @route   GET /api/users/search?email=...
-// @desc    Search user by email (for adding to project)
-// @access  Private
-router.get('/search', protect, async (req, res) => {
-  try {
-    const { email } = req.query;
-    if (!email) return res.status(400).json({ message: 'Email query required' });
+const router = express.Router();
 
-    const user = await User.findOne({ email: email.toLowerCase() });
-    if (!user) return res.status(404).json({ message: 'User not found' });
-
-    res.json({ _id: user._id, name: user.name, email: user.email });
-  } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
-  }
-});
+const publicFields = { _id: 1, name: 1, email: 1 };
 
 // @route   PUT /api/users/profile
-// @desc    Update profile name
+// @desc    Update the caller's display name
 // @access  Private
-router.put('/profile', protect, async (req, res) => {
-  try {
-    const { name } = req.body;
-    if (!name) return res.status(400).json({ message: 'Name is required' });
+router.put(
+  '/profile',
+  protect,
+  [
+    body('name').trim().notEmpty().withMessage('Name is required')
+      .isLength({ max: 50 }).withMessage('Name cannot exceed 50 characters'),
+  ],
+  validate,
+  asyncHandler(async (req, res) => {
+    // `runValidators` so the schema's maxlength is actually enforced here.
     const user = await User.findByIdAndUpdate(
       req.user._id,
-      { name },
-      { new: true }
+      { name: req.body.name },
+      { new: true, runValidators: true, projection: publicFields }
     );
-    res.json({ _id: user._id, name: user.name, email: user.email });
-  } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
-  }
-});
+    if (!user) throw ApiError.notFound('User not found');
+
+    res.json(user);
+  })
+);
+
+// @route   GET /api/users/search?email=...
+// @desc    Look up an exact email so an admin can confirm who they're adding
+// @access  Private
+router.get(
+  '/search',
+  protect,
+  asyncHandler(async (req, res) => {
+    const { email } = req.query;
+    if (!email || typeof email !== 'string') {
+      throw ApiError.badRequest('Email query required');
+    }
+
+    const user = await User.findOne({ email: normalizeEmail(email) }, publicFields).lean();
+    // Same response for "no such user" whether or not the address is registered,
+    // and no other account data is ever exposed.
+    if (!user) throw ApiError.notFound('No user found with that email');
+
+    res.json(user);
+  })
+);
 
 module.exports = router;

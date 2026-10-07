@@ -1,3 +1,11 @@
 .task-modal-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .task-modal-form  { display: flex; flex-direction: column; gap: 14px; }
 .task-modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }
+
+.input-field:disabled {
+  opacity: 0.55; cursor: not-allowed; background: var(--bg4);
+}
+
+@media (max-width: 480px) {
+  .task-modal-grid2 { grid-template-columns: 1fr; }
+}

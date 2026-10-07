@@ -3,23 +3,40 @@
   "version": "1.0.0",
   "description": "Full-stack MERN Team Task Manager",
   "main": "server/index.js",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "start": "node server/index.js",
-    "server": "nodemon server/index.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "npm install --prefix client && npm run build --prefix client",
-    "install-all": "npm install && npm install --prefix client"
+    "server": "nodemon --watch server server/index.js",
+    "client": "npm run dev --prefix client",
+    "dev": "concurrently -k -n server,client -c magenta,cyan \"npm run server\" \"npm run client\"",
+    "build": "npm run install-client && npm run build-client",
+    "install-client": "npm install --prefix client",
+    "build-client": "npm run build --prefix client",
+    "install-all": "npm install && npm run install-client",
+    "dev:local": "node scripts/dev-local-db.js",
+    "test": "node test/test.js && node test/rbac.js",
+    "test:ui": "node test/e2e.js && node test/browser.js && node test/member.js",
+    "test:dev": "node test/devmongo.js",
+    "test:all": "npm run test && npm run test:ui"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "concurrently": "^8.2.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "express-validator": "^7.0.1",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.0.0",
-    "nodemon": "^3.0.2"
+    "dotenv": "^16.4.5",
+    "express": "^4.22.3",
+    "express-rate-limit": "^8.7.1",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.24.5"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "mongodb-memory-server": "^11.3.0",
+    "nodemon": "^3.1.14",
+    "puppeteer": "^25.12.0"
   }
 }

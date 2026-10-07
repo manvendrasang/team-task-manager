@@ -27,11 +27,13 @@ const TaskSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Project',
       required: true,
+      index: true,
     },
     assignee: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       default: null,
+      index: true,
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
@@ -39,19 +41,26 @@ const TaskSchema = new mongoose.Schema(
       required: true,
     },
     dueDate: { type: Date },
-    tags: [{ type: String, trim: true }],
+    tags: {
+      type: [{ type: String, trim: true, maxlength: 30 }],
+      default: [],
+    },
     expedited: { type: Boolean, default: false },
     completedAt: { type: Date },
   },
   { timestamps: true }
 );
 
-// Set completedAt when task is marked done
-TaskSchema.pre('save', function (next) {
+// Kanban boards group by status within a project; overdue filters scan dueDate.
+TaskSchema.index({ project: 1, status: 1, createdAt: -1 });
+TaskSchema.index({ dueDate: 1 });
+
+// Keep completedAt in step with status on every save.
+TaskSchema.pre('save', function syncCompletedAt(next) {
   if (this.isModified('status')) {
-    if (this.status === 'done' && !this.completedAt) {
-      this.completedAt = new Date();
-    } else if (this.status !== 'done') {
+    if (this.status === 'done') {
+      this.completedAt = this.completedAt || new Date();
+    } else {
       this.completedAt = undefined;
     }
   }
