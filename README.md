@@ -1,4 +1,9 @@
-# ⚡ TaskFlow — Team Task Manager
+THIS REPO IS NOW CLOSED AND BEIGN MERGED UNDER BigCRM REPO
+
+
+
+
+# TaskFlow — Team Task Manager
 
 A MERN task manager: projects with members, a kanban board, task assignment, and
 an admin warning system with a recipient inbox.
@@ -236,7 +241,7 @@ project's warnings tab. Nobody can warn themselves.
 
 ## Troubleshooting
 
-**`❌ MONGO_URI is not set`** — you skipped the `.env` step. Run
+**` MONGO_URI is not set`** — you skipped the `.env` step. Run
 `cp .env.example .env`, or use `npm run dev:local` to skip the database entirely.
 
 **`Could not connect to any servers`** — the database isn't reachable. Check
